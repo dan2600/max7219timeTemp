@@ -16,6 +16,6 @@ device = max7219(serial, cascaded=4, block_orientation=-90, rotate=0)
 print("Created device")
 theTime = internetTime.getDateTime()
 theWeather = internetWeather.getWeather()
-msg = "Current Temp "+internetWeather[0].temp()+"° F"
+msg = "Current Temp "+theWeather[0].temp()+"° F"
 print(msg)
 show_message(device, msg, fill="white", font=proportional(LCD_FONT), scroll_delay=0.1)
