@@ -15,15 +15,22 @@ from luma.core.legacy.font import proportional, CP437_FONT, TINY_FONT, SINCLAIR_
 serial = spi(port=0, device=0, gpio=noop())
 device = max7219(serial, cascaded=4, block_orientation=-90, rotate=0)
 print("Created device")
-
-def showMsg():
-    msg = theTime.strftime("%b %d %y %H:%M:%S")+" Current condition: "+theWeather[0].text()+"Current Temp "+theWeather[0].temp()+"° F"
-    print(msg)
-    show_message(device, msg, fill="white", font=proportional(LCD_FONT), scroll_delay=0.1)
-
-
-
+device.contrast(96)
 theTime = internetTime.getDateTime()
 theWeather = internetWeather.getWeather()
+loops = 0
+
+def showMsg():
+	global loops, theTime, theWeather
+    if loops > 4:
+    	loops = 0
+    	theTime = internetTime.getDateTime()
+        theWeather = internetWeather.getWeather()
+    loops += 1
+    msg = theTime.strftime("%b %d %y %I:%M%p")+" Current condition: "+theWeather[0].text()+"Current Temp "+theWeather[0].temp()+"F"
+    print(msg)
+    show_message(device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.05)
+    showMsg();
+
 showMsg();
 
