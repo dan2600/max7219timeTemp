@@ -18,7 +18,7 @@ print("Created device")
 
 def showMsg():
     msg = theTime.strftime("%b %d %y %H:%M:%S")+" Current condition: "+theWeather[0].text()+"Current Temp "+theWeather[0].temp()+"° F"
-    print(msg)
+    print(msg)ß
     show_message(device, msg, fill="white", font=proportional(LCD_FONT), scroll_delay=0.1)
 
 
