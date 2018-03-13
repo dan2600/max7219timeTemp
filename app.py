@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import internetTime
 import internetWeather
 import re
