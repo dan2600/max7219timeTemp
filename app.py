@@ -21,16 +21,15 @@ theWeather = internetWeather.getWeather()
 loops = 0
 
 def showMsg():
-	global loops, theTime, theWeather
+    global loops, theTime, theWeather
     if loops > 4:
-    	loops = 0
-    	theTime = internetTime.getDateTime()
+        loops = 0
+        theTime = internetTime.getDateTime()
         theWeather = internetWeather.getWeather()
     loops += 1
     msg = theTime.strftime("%b %d %y %I:%M%p")+" Current condition: "+theWeather[0].text()+"Current Temp "+theWeather[0].temp()+"F"
     print(msg)
     show_message(device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.05)
     showMsg();
-
 showMsg();
 
