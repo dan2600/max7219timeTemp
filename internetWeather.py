@@ -5,7 +5,7 @@ def getWeather():
     weather = Weather(unit=Unit.FAHRENHEIT)
 
     try:
-        location = weather.lookup(11237)
+        location = weather.lookup('2459115')
     except ConnectionError as e:
         print e
         class error:

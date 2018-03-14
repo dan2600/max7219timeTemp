@@ -35,7 +35,7 @@ def lookupTime():
     try:
         realtime_data = subway_feed['entity'] # train_data is a list
     except:
-        return "L Train Error"        
+        return "Error"        
 # Because the data feed includes multiple arrival times for a given station
 # a global list needs to be created to collect the various times
     collected_times = []
@@ -65,8 +65,8 @@ def lookupTime():
     time_until_train = int(((nearest_arrival_time - current_time) / 60))
     time_until_next = int(((second_arrival_time - current_time) / 60))
 
-# This final part of the code checks the time to arrival and prints a few
-# different messages depending on the circumstance
+
+    print("trains in "+str(time_until_train) + " & " +str(time_until_next))
     if time_until_train > 7 or time_until_next <= time_until_train:
         return "L in "+str(time_until_train) + " min"
     elif time_until_train <= 0 and time_until_next > 0:

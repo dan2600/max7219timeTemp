@@ -4,13 +4,13 @@ import internetWeather
 import re
 import time
 import argparse
-import mta_notification
+import lTrainTimes
 from datetime import datetime, timedelta
 
 theWeather = internetWeather.getWeather()
 weatherExpires = datetime.now() + timedelta(minutes=5)
 mtaExpires = datetime.now() + timedelta(seconds=30)
-nextTrain = mta_notification.lookupTime()
+nextTrain = lTrainTimes.lookupTime()
 
 
 def showMsg():
@@ -20,9 +20,13 @@ def showMsg():
         theWeather = internetWeather.getWeather()
         weatherExpires = datetime.now() + timedelta(minutes=5)
     if mtaExpires - datetime.now() < timedelta(seconds=0):
-        print("Updating Trains")
-        nextTrain = mta_notification.lookupTime()
-        mtaExpires = datetime.now() + timedelta(seconds=30)
+        lookup = lTrainTimes.lookupTime()
+        if lookup == "Error":
+            print("train update Error")
+            mtaExpires = datetime.now()          
+        else:
+            nextTrain = lookup
+            mtaExpires = datetime.now() + timedelta(seconds=30)
     msg = theWeather[0].text()+" "+theWeather[0].temp()+"F "+nextTrain
     print(msg)
     time.sleep(1)
