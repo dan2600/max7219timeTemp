@@ -1,10 +1,28 @@
 from weather import Weather, Unit
+from requests.exceptions import ConnectionError
 weather = Weather()
 def getWeather():
-	weather = Weather(unit=Unit.FAHRENHEIT)
-	location = weather.lookup_by_location('brooklyn')
-	condition = location.condition()
-	forecasts = location.forecast()
-	return [condition, forecasts]
+    weather = Weather(unit=Unit.FAHRENHEIT)
 
-
+    try:
+        location = weather.lookup(11237)
+    except ConnectionError as e:
+        print e
+        class error:
+            def text(x):
+                return "read error"
+            def temp(x):
+                return "0"
+        condition = error()
+        return [condition]
+    try:
+        condition = location.condition()
+    except:
+    	print("Read Error")
+        class error:
+            def text(x):
+                return "read error"
+            def temp(x):
+                return "0"
+        condition = error()
+    return [condition]
