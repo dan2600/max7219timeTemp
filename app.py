@@ -18,8 +18,9 @@ device.contrast(1)
 theWeather = internetWeather.getWeather()
 weatherExpires = datetime.now() + timedelta(minutes=5)
 mtaExpires = datetime.now() + timedelta(seconds=30)
+nextTrain = "loading"
 def showMsg():
-    global loops, theTime, theWeather, weatherExpires, mtaExpires
+    global loops, theTime, theWeather, weatherExpires, mtaExpires, nextTrain
     if weatherExpires - datetime.now() < timedelta(seconds=0):
         theWeather = internetWeather.getWeather()
         weatherExpires = datetime.now() + timedelta(minutes=5)
@@ -27,10 +28,10 @@ def showMsg():
         lookup = lTrainTimes.lookupTime()
         if lookup == "Error":
         	print("train update Error")
-            mtaExpires = datetime.now()          
+                mtaExpires = datetime.now()          
         else:
         	nextTrain = lookup
-            mtaExpires = datetime.now() + timedelta(seconds=30)
+                mtaExpires = datetime.now() + timedelta(seconds=30)
     msg = theWeather[0].text()+" "+theWeather[0].temp()+"F "+nextTrain
     show_message(device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.035)
 while True:
