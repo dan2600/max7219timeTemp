@@ -3,7 +3,6 @@ from requests.exceptions import ConnectionError
 weather = Weather()
 def getWeather():
     weather = Weather(unit=Unit.FAHRENHEIT)
-
     try:
         location = weather.lookup('2459115')
     except ConnectionError as e:
@@ -17,6 +16,7 @@ def getWeather():
         return [condition]
     try:
         condition = location.condition()
+        forcasts = location.forecast()
     except:
     	print("Read Error")
         class error:
@@ -25,4 +25,4 @@ def getWeather():
             def temp(x):
                 return "0"
         condition = error()
-    return [condition]
+    return [condition, forcasts]
