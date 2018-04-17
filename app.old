@@ -32,7 +32,7 @@ def showMsg():
         else:
         	nextTrain = lookup
                 mtaExpires = datetime.now() + timedelta(seconds=30)
-    msg = theWeather[1][0].high()+"F/"+theWeather[1][0].low()+"F "+theWeather[0].text()+" "+theWeather[0].temp()+"F "+nextTrain
+    msg = theWeather[0].text()+" "+theWeather[0].temp()+"F "+nextTrain
     show_message(device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.035)
 while True:
     showMsg()
